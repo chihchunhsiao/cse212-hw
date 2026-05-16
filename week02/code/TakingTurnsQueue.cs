@@ -40,9 +40,14 @@ public class TakingTurnsQueue
         else
         {
             Person person = _people.Dequeue();
-            if (person.Turns > 1)
+            if (person.Turns <=0 || person.Turns > 1) // Defect 2: We need to consider cases with an infinite number of attempts (<=0) or cases with remaining attempts (>1)
             {
-                person.Turns -= 1;
+                // Only those with a limited number of attempts need to reduce by 1.
+                if (person.Turns >1)
+                {
+                    person.Turns -= 1;
+                }
+                
                 _people.Enqueue(person);
             }
 
