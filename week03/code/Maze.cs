@@ -33,6 +33,27 @@ public class Maze
     public void MoveLeft()
     {
         // FILL IN CODE
+        // Set a current coordinate
+        var currentKey = (_currX, _currY);
+
+        // If the currentKey exist in the map, get the bool value of mazeMap
+        if (_mazeMap.TryGetValue(currentKey, out bool [] movements))
+        {
+            // If the left movement is true, it can move left, and _currX -1
+            if (movements[0] == true)
+            {
+                _currX -= 1;
+            }            
+
+            // If the left movement is false, it can not move left, 
+            // and throw an InvalidOperationException with the message "Can't go that way!".
+            else
+            {
+                throw new InvalidOperationException("Can't go that way!");
+            }
+        }
+        
+        
     }
 
     /// <summary>
@@ -42,6 +63,25 @@ public class Maze
     public void MoveRight()
     {
         // FILL IN CODE
+        // Set a current coordinate
+        var currentKey = (_currX, _currY);
+
+        // If the currentKey exist in the map, get the bool value of mazeMap
+        if (_mazeMap.TryGetValue(currentKey, out bool [] movements))
+        {
+            // If the right movement is true, it can move right, and _currX +1
+            if (movements[1] == true)
+            {
+                _currX += 1;
+            }            
+
+            // If the right movement is false, it can not move right, 
+            // and throw an InvalidOperationException with the message "Can't go that way!".
+            else
+            {
+                throw new InvalidOperationException("Can't go that way!");
+            }
+        }
     }
 
     /// <summary>
@@ -51,6 +91,25 @@ public class Maze
     public void MoveUp()
     {
         // FILL IN CODE
+        // Set a current coordinate
+        var currentKey = (_currX, _currY);
+
+        // If the currentKey exist in the map, get the bool value of mazeMap
+        if (_mazeMap.TryGetValue(currentKey, out bool [] movements))
+        {
+            // If the up movement is true, it can move up, and _currY -1
+            if (movements[2] == true)
+            {
+                _currY -= 1;
+            }            
+
+            // If the up movement is false, it can not move up, 
+            // and throw an InvalidOperationException with the message "Can't go that way!".
+            else
+            {
+                throw new InvalidOperationException("Can't go that way!");
+            }
+        }
     }
 
     /// <summary>
@@ -60,6 +119,25 @@ public class Maze
     public void MoveDown()
     {
         // FILL IN CODE
+        // Set a current coordinate
+        var currentKey = (_currX, _currY);
+
+        // If the currentKey exist in the map, get the bool value of mazeMap
+        if (_mazeMap.TryGetValue(currentKey, out bool [] movements))
+        {
+            // If the down movement is true, it can move down, and _currY +1
+            if (movements[3] == true)
+            {
+                _currY += 1;
+            }            
+
+            // If the down movement is false, it can not move down, 
+            // and throw an InvalidOperationException with the message "Can't go that way!".
+            else
+            {
+                throw new InvalidOperationException("Can't go that way!");
+            }
+        }
     }
 
     public string GetStatus()

@@ -22,7 +22,45 @@ public static class SetsAndMaps
     public static string[] FindPairs(string[] words)
     {
         // TODO Problem 1 - ADD YOUR CODE HERE
-        return [];
+        // Assuem the words in the list are lower case, two characters long,
+        // and contain no duplicates.
+        // 1. Create a HashSet<string> to store the seen words and fix the capacity
+        HashSet<string> seenWords = new HashSet<string> (words.Length);
+        // 2. Create a list to store the results
+        List<string> findPairs = new List<string>();
+
+        // 3. Create a loop to iterate the words list
+        foreach (string word in words)
+        {
+            
+            // 4.If the same character, pass it
+            if (word[0] == word[1]) continue;
+            // If the word already exists in the seenWords, it is considered a duplicate word, and pass it
+            if (seenWords.Contains(word)) continue;
+            
+            // 5. Reverse the current two-character word
+            string reversed = $"{word[1]}{word[0]}";
+
+            // 6. Check if the reversed word has already been seen
+            if (seenWords.Contains(reversed))
+            {  
+                // If found, we store the pair into the list
+                findPairs.Add($"{reversed} & {word}");
+
+                // If a pair is found, remove the matched word from the set
+                seenWords.Remove(reversed);
+            
+            }
+            // If not found, we add the word into the seenWords
+            else 
+            {
+                seenWords.Add(word);
+            }                
+            
+        }
+        
+        // 7. Convert the list to an array and return the findPairs 
+        return findPairs.ToArray();
     }
 
     /// <summary>
@@ -43,6 +81,21 @@ public static class SetsAndMaps
         {
             var fields = line.Split(",");
             // TODO Problem 2 - ADD YOUR CODE HERE
+            // 1. Set a degreeName to save the degree from the 4th column
+            string degreeName = fields[3];
+    
+            // 2. If the degree is not in the dictionary,
+            //    add degree to the dictionary as the key and set the value = 1
+            if (!degrees.ContainsKey(degreeName))
+            {
+                degrees.Add(degreeName, 1);
+            }
+            // 3. If the degree already exists, then add 1 to the value
+            else
+            {
+                degrees[degreeName] += 1;
+            }     
+            
         }
 
         return degrees;
@@ -67,7 +120,56 @@ public static class SetsAndMaps
     public static bool IsAnagram(string word1, string word2)
     {
         // TODO Problem 3 - ADD YOUR CODE HERE
-        return false;
+        // Convert the strings word1 and word2 to lowercase
+        string word1Lower = word1.ToLower();
+        string word2Lower = word2.ToLower();
+        // Store the converted string to the dictionary<char> and save the character to the key and save the value = 1
+        Dictionary<char, int> myDict1 = new Dictionary<char, int>();
+        Dictionary<char, int> myDict2 = new Dictionary<char, int>();
+        // Use loop th check if key has existed
+        foreach (char c1 in word1Lower)
+        {
+            // Ignore any spaces
+            if (c1 == ' ') continue;
+            // if the character is not found, add to the myDict1 and value = 1
+            if (!myDict1.ContainsKey(c1))
+            {
+                myDict1[c1] = 1;
+            }
+
+            // if the character is found, add one to the value
+            else
+            {
+                myDict1[c1] += 1;
+            }
+
+        }
+
+        foreach (char c2 in word2Lower)
+        {
+            // Ignore any spaces
+            if (c2 == ' ') continue;
+            // if the character is not found, add to the myDict2 and value = 1
+            if (!myDict2.ContainsKey(c2))
+            {
+                myDict2[c2] = 1;
+            }
+
+            // if the character is found, add one to the value
+            else
+            {
+                myDict2[c2] += 1;
+            }
+
+        }
+       
+        // Compare the myDict1 and myDict2 has the same (key, value)
+        // if it is true save the result and return it
+        bool areEqual = myDict1.Count == myDict2.Count 
+                        && myDict1.All(kvp => myDict2.TryGetValue(kvp.Key, out var value) 
+                        && Equals(kvp.Value, value));
+        // else
+        return areEqual;
     }
 
     /// <summary>
