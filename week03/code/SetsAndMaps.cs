@@ -168,7 +168,7 @@ public static class SetsAndMaps
         bool areEqual = myDict1.Count == myDict2.Count 
                         && myDict1.All(kvp => myDict2.TryGetValue(kvp.Key, out var value) 
                         && Equals(kvp.Value, value));
-        // else
+        
         return areEqual;
     }
 
