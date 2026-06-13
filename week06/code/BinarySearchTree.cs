@@ -81,6 +81,18 @@ public class BinarySearchTree : IEnumerable<int>
     private void TraverseBackward(Node? node, List<int> values)
     {
         // TODO Problem 3
+        // If node is not null, recursively traverse the right subtree first until the node is null, 
+        // Once the right side is fully visited, we come back and add the current node's data to the list. 
+        // Finnaly, we recursively traverse the left subtree. 
+        if (node is not null)
+        {
+            // We recursively visit the right child 
+            TraverseBackward(node.Right, values);
+            // Add the current node's data to the List of values
+            values.Add(node.Data);
+            // We recursively visit the left child
+            TraverseBackward(node.Left, values);
+        }
     }
 
     /// <summary>
@@ -99,8 +111,10 @@ public class BinarySearchTree : IEnumerable<int>
     }
 }
 
-public static class IntArrayExtensionMethods {
-    public static string AsString(this IEnumerable array) {
+public static class IntArrayExtensionMethods
+{
+    public static string AsString(this IEnumerable array)
+    {
         return "<IEnumerable>{" + string.Join(", ", array.Cast<int>()) + "}";
     }
 }
